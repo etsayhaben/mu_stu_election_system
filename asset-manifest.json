@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/mu_stu_election_system/static/css/main.a3456a5c.css",
-    "main.js": "/mu_stu_election_system/static/js/main.380e42cd.js",
+    "main.js": "/mu_stu_election_system/static/js/main.72e83fb7.js",
     "static/js/453.f84218d7.chunk.js": "/mu_stu_election_system/static/js/453.f84218d7.chunk.js",
     "static/media/logo.svg": "/mu_stu_election_system/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "/mu_stu_election_system/index.html",
     "main.a3456a5c.css.map": "/mu_stu_election_system/static/css/main.a3456a5c.css.map",
-    "main.380e42cd.js.map": "/mu_stu_election_system/static/js/main.380e42cd.js.map",
+    "main.72e83fb7.js.map": "/mu_stu_election_system/static/js/main.72e83fb7.js.map",
     "453.f84218d7.chunk.js.map": "/mu_stu_election_system/static/js/453.f84218d7.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.a3456a5c.css",
-    "static/js/main.380e42cd.js"
+    "static/js/main.72e83fb7.js"
   ]
 }

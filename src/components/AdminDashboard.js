@@ -23,7 +23,7 @@ function AdminDashboard() {
                 <div className="sidebar" style={{ backgroundColor: '#333', color: '#fff', width: '200px' }}>
                     <ul style={{ listStyleType: 'none', padding: 0 }}>
                         <li><button onClick={() => showContent('home')} className="sidebar-button">Home</button></li>
-                        <li><button onClick={() => showContent('register')} className="sidebar-button">Register</button></li>
+                        <li><button onClick={() => showContent('register')} className="sidebar-button">Registeration</button></li>
                         <li><button onClick={() => showContent('register-parlament')} className="sidebar-button">register member of parlament</button></li>
                         <li><button onClick={() => showContent('committee')} className="sidebar-button">Committee</button></li>
                         <li><button onClick={() => showContent('view-status')} className="sidebar-button">View Status</button></li>
@@ -33,7 +33,7 @@ function AdminDashboard() {
                 </div>
                 <div className="main-content" style={{ flexGrow: 1, padding: '20px' }}>
                     {activeContent === 'home' && <div><h2>Home</h2><p>This is the Home content.</p></div>}
-                    {activeContent === 'registeratopm' && <div> <CommitteeRegistrationForm status={status} onStatusChange={handleStatusChange} /></div>}
+                    {activeContent === 'register' && <div> <CommitteeRegistrationForm status={status} onStatusChange={handleStatusChange} /></div>}
                     {activeContent === 'committee' && <div><h2>Committee</h2><p>This is the Committee content.</p></div>}
                     {activeContent === 'view-status' && <div><h2>View Status</h2><p>This is the View Status content.</p></div>}
                     {activeContent === 'register-parlament' && <div> <AdminRegistrationDashboard /></div>}

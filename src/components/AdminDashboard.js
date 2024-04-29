@@ -25,8 +25,8 @@ function AdminDashboard() {
                         <li><button onClick={() => showContent('home')} className="sidebar-button">Home</button></li>
                         <li><button onClick={() => showContent('register')} className="sidebar-button">Registeration</button></li>
                         <li><button onClick={() => showContent('register-parlament')} className="sidebar-button">register member of parlament</button></li>
-                        <li><button onClick={() => showContent('committee')} className="sidebar-button">Committee</button></li>
-                        <li><button onClick={() => showContent('view-status')} className="sidebar-button">View Status</button></li>
+                        <li><button onClick={() => showContent('committee')} className="sidebar-button">Committeee</button></li>
+                        <li><button onClick={() => showContent('view-status')} className="sidebar-button">View_Status</button></li>
                         <li><button onClick={() => showContent('generate-report')} className="sidebar-button">Generate Report</button></li>
                         <li><button onClick={() => showContent('change-profile')} className="sidebar-button">Change Profile</button></li>
                     </ul>

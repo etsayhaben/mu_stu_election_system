@@ -1,60 +1,27 @@
 import React, { useState } from 'react';
 
-const MemberOfParliament = ({ sid, ro }) => {
-  const [form, setForm] = useState(1);
-
-  // Form 1 state
-  const [studentId, setStudentId] = useState(sid || '');
-  const [role, setRole] = useState(ro || '')
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [year, setYear] = useState('');
-
-  // Form 2 state
-  const [branch, setBranch] = useState('');
-  const [department, setDepartment] = useState('');
-  const [section, setSection] = useState('');
-  const [success, setSuccess] = useState(false);
+const MemberOfParliament = () => {
+  const [student_id, setRegistrationId] = useState('');
+  const [full_name, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [role, setRole] = useState('');
   const [loading, setLoading] = useState(false);
-  const handleNext = () => {
-    setForm(2);
-  };
-
-  const handleBack = () => {
-    setForm(1);
-  };
-
-  const handleBranchChange = (event) => {
-    const selectedBranch = event.target.value;
-    setBranch(selectedBranch);
-    // Reset department when branch changes
-    setDepartment('');
-  };
-
-  const handleDepartmentChange = (event) => {
-    const selectedDepartment = event.target.value;
-    setDepartment(selectedDepartment);
-  };
-
-
-
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState("");
+  const [message, setMessage] = useState('');
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     setLoading(true);
 
     const data = {
-      studentId,
-      firstName,
-      lastName,
+      student_id,
+      full_name,
+      email,
       role,
-      year,
-      branch,
-      department,
-      section
     };
+
     try {
-      const response = await fetch('http://localhost:8080/api/accounts/create', {
+      const response = await fetch('http://localhost:8080/admin/accounts/create', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -65,97 +32,69 @@ const MemberOfParliament = ({ sid, ro }) => {
 
       if (response.ok) {
         setSuccess(true);
-
+        setMessage("successfully created");
+        //it must rediret to for example if it is member of parlamnet 
+        //the admin creats the account of member of parlament then completes his profile 
+        //all his profile is in 
       } else {
+        setSuccess(false);
+        setError("student already Exists")
         throw new Error('Error creating account');
+
       }
     } catch (err) {
-      console.error(err);
-      alert('Error creating account');
+      setSuccess(false);
+      setError('student already existed');
     } finally {
       setLoading(false);
     }
   };
 
-
   return (
     <div>
-      {form === 1 && (
-        <form>
+      <form onSubmit={handleSubmit}>
+        <label>Registration ID:</label>
+        <input
+          type="text"
+          value={student_id}
+          onChange={(e) => setRegistrationId(e.target.value)}
+          required
+        /><br />
 
-          <label>First Name:</label>
-          <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} style={{ width: '20%' }} /><br />
+        <label>Full Name:</label>
+        <input
+          type="text"
+          value={full_name}
+          onChange={(e) => setFullName(e.target.value)}
+          required
+        /><br />
 
-          <label>Last Name:</label>
-          <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} style={{ width: '20%' }} /><br />
+        <label>Email:</label>
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        /><br />
 
-          <label>Year:</label>
-          <input type="text" value={year} onChange={(e) => setYear(e.target.value)} style={{ width: '20%' }} /><br />
+        <label>Role:</label>
+        <select
+          value={role}
+          onChange={(e) => setRole(e.target.value)}
+          required
+        >
+          <option value="">Select Role</option>
+          <option value="MemberOfParliament">Member of Parliament</option>
+          <option value="ElectionCommittee">Election Committee</option>
+          <option value="Candidate">Candidate</option>
+          {/* Add other roles here */}
+        </select><br />
 
-          <button style={{ width: '20%' }} type="button" onClick={handleNext}>Next</button>
-        </form>
-      )}
-
-      {form === 2 && (
-        <form>
-          <label>Branch:</label>
-          <select style={{ width: '20%' }} value={branch} onChange={handleBranchChange} >
-            <option value="" style={{ width: '20%' }}>Select Branch</option>
-            <option style={{ width: '20%' }} value="ayder">Ayder Campus</option>
-            <option style={{ width: '20%' }} value="main">Main</option>
-            <option style={{ width: '20%' }} value="quiha">Quiha</option>
-            <option style={{ width: '20%' }} value="veterinary">Veterinary</option>
-            <option style={{ width: '20%' }} value="MIT">MIT</option>
-            <option style={{ width: '20%' }} value="business">Business Campus</option>
-          </select><br />
-
-          {branch === 'ayder' && (
-            <div>
-              <label>Department:</label>
-              <select value={department} onChange={handleDepartmentChange}>
-                <option value="">Select Department</option>
-                <option value="medicine">Medicine</option>
-                <option value="dentalMedicine">Dental Medicine</option>
-                <option value="HO">HO</option>
-                <option value="otherHealth">Other Health</option>
-              </select><br />
-            </div>
-          )}
-
-          {branch === 'quiha' && (
-            <div>
-              <label>Department:</label>
-              <select value={department} onChange={handleDepartmentChange}>
-                <option value="">Select Department</option>
-                <option value="softwareEngineering">Software Engineering</option>
-                <option value="electricalEngineering">Electrical Engineering</option>
-                <option value="computerScience">Computer Science</option>
-                <option value="informationScience">Information Science</option>
-                <option value="chemicalEngineering">Chemical Engineering</option>
-              </select><br />
-            </div>
-          )}
-
-          {branch === 'business' && (
-            <div>
-              <label>Department:</label>
-              <select value={department} onChange={handleDepartmentChange}>
-                <option value="">Select Department</option>
-                <option value="law">Law</option>
-                <option value="journalism">Journalism</option>
-                <option value="accounting">Accounting</option>
-                <option value="management">Management</option>
-              </select><br />
-            </div>
-          )}
-
-          <label>Section:</label>
-          <input style={{ width: '20%' }} type="text" value={section} onChange={(e) => setSection(e.target.value)} /><br />
-
-          <button style={{ width: '20%' }} type="button" onClick={handleBack}>Back</button>
-          <button style={{ width: '20%' }} type="button" onClick={handleSubmit}>Submit</button>
-        </form>
-      )}
+        <button type="submit" disabled={loading}>
+          {loading ? 'Loading...' : 'Submit'}
+        </button>
+        {success ? message : error}
+      </form>
     </div>
   );
 };

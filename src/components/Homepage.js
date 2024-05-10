@@ -1,133 +1,54 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../CSSFolder/homepage.css';
+import Header from './Header';
+import Footer from './Footer';
 
 function Homepage() {
-  const [id, setId] = useState('');
-  const [name, setStudentName] = useState('');
-  const [department, setDepartment] = useState('');
-  const [section, setSection] = useState('');
-  const [sex, setSex] = useState('');
-  const [role, setRole] = useState('');
-  const [branch, setBranch] = useState('');
-  const [students, setStudents] = useState([]);
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    // Create an object with the form data
-    const formData = {
-      id,
-      name,
-      department,
-      section,
-      sex,
-      role,
-      branch
-    };
-
-    // Send the form data to the backend
-    axios.post('http://localhost:9000/api', formData)
-      .then(response => {
-        console.log(response.data);
-        // Handle success or show a success message to the user
-      })
-      .catch(error => {
-        console.error(error);
-        // Handle error or show an error message to the user
-      });
-  };
-
-  const handleShowStudents = () => {
-    // Retrieve students data from the database
-    axios.get('http://localhost:9000/api/students')
-      .then(response => {
-        setStudents(response.data);
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  };
-
-  useEffect(() => {
-    handleShowStudents();
-  }, []);
-
   return (
-    <div className="container">
-      <h1>Student Registration</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          ID:
-          <input
-            type="text"
-            value={id}
-            onChange={event => setId(event.target.value)}
+    <div className="member-of-parliament-page">
+      <Header />
+      <div className="content">
+        <h1>Welcome to the Mekelle University Student Union Online Election Platform!</h1>
+        <div className="announcement">
+          <h2>Election Announcement</h2>
+          <p>The upcoming student union election is scheduled for thursday at 9:00 am- 12:00 am</p>
+        </div>
+        <div className="body-content">
+          <Article
+            title="Why Should I Vote?"
+            content="Voting in the student union election is your opportunity to have a say in the direction of Mekelle University. Your vote matters and helps shape the future of our campus community."
           />
-        </label>
-        <label>
-          Student Name:
-          <input
-            type="text"
-            value={name}
-            onChange={event => setStudentName(event.target.value)}
+          <Article
+            title="The Importance of Student Union"
+            content="The student union represents the collective voice of Mekelle University students. It plays a vital role in advocating for student rights, organizing events, and fostering a sense of belonging on campus."
           />
-        </label>
-        <label>
-          Department:
-          <input
-            type="text"
-            value={department}
-            onChange={event => setDepartment(event.target.value)}
+          <Article
+            title="How to Participate"
+            content="To participate in the student union election, make sure you are registered as a student at Mekelle University. Stay tuned for announcements regarding candidate nominations, voting procedures, and election dates."
           />
-        </label>
-        <label>
-          Section:
-          <input
-            type="text"
-            value={section}
-            onChange={event => setSection(event.target.value)}
-          />
-        </label>
-        <label>
-          Sex:
-          <input
-            type="text"
-            value={sex}
-            onChange={event => setSex(event.target.value)}
-          />
-        </label>
-        <label>
-          Role:
-          <input
-            type="text"
-            value={role}
-            onChange={event => setRole(event.target.value)}
-          />
-        </label>
-        <label>
-          Branch:
-          <input
-            type="text"
-            value={branch}
-            onChange={event => setBranch(event.target.value)}
-          />
-        </label>
-        <button type="submit">Register</button>
-       
-        
-      </form>
-      <button onClick={handleShowStudents}>Show Students</button>
-      <div className="students-list">
-        <h2>Students List</h2>
-        <ul>
-          {students.map(student => (
-            <li key={student.id}>
-              {student.name} - {student.department} - {student.section}
-            </li>
-          ))}
-        </ul>
+          <div className="candidate-profiles">
+            <h2>Candidate Profiles</h2>
+            <p>Get to know the candidates running for student union positions:</p>
+            {/* Add candidate profiles here */}
+          </div>
+          <div className="election-guidelines">
+            <h2>Election Guidelines</h2>
+            <p>Review the election guidelines and rules to ensure a fair and transparent election process:</p>
+            {/* Add election guidelines here */}
+          </div>
+        </div>
       </div>
+      <Footer />
+    </div>
+  );
+}
+
+function Article({ title, content }) {
+  return (
+    <div className="article">
+      <h2>{title}</h2>
+      <p>{content}</p>
     </div>
   );
 }

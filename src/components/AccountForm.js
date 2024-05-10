@@ -19,7 +19,7 @@ const AccountForm = ({ defaultRole, onFormClose }) => {
         const account = { studentId, password, email, role };
 
         try {
-            const response = await fetch('http://localhost:8080/api/accounts/create', {
+            const response = await fetch('http://localhost:8080/admin/accounts/create', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
